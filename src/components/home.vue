@@ -19,14 +19,14 @@
     </el-header>
     <el-container>
       <el-aside width="200px">
-        <el-menu unique-opened default-active="2">
+        <el-menu router unique-opened default-active="2">
           <!-- 1 -->
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-location"></i>
               <span>用户管理</span>
             </template>
-            <el-menu-item index="1-3">
+            <el-menu-item index="users">
               <i class="el-icon-info"></i>
               用户列表
             </el-menu-item>
@@ -89,7 +89,9 @@
           </el-submenu>
         </el-menu>
       </el-aside>
-      <el-main>Main</el-main>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -98,34 +100,34 @@
 export default {
   // 如果 token 就渲染home
   // 反之 就不渲染
-beforeCreate() {
-  if(!localStorage.getItem("token")){
-    this.$message.warning("请先登录")
-    this.$router.push({
-      name: "login"
-    })
-  }
-},
+  beforeCreate () {
+    if (!localStorage.getItem('token')) {
+      this.$message.warning('请先登录')
+      this.$router.push({
+        name: 'login'
+      })
+    }
+  },
   // 退出方法
- methods: {
-    handleLoginout() {
+  methods: {
+    handleLoginout () {
     // 清除token
-    localStorage.clear();
-    // 回到登录组件
-    this.$router.push({
-      name: "login"
-    });
-    // 提示
-    this.$message.success("退出成功")
+      localStorage.clear()
+      // 回到登录组件
+      this.$router.push({
+        name: 'login'
+      })
+      // 提示
+      this.$message.success('退出成功')
+    }
   }
- },
-};
+}
 </script>
 
 <style>
 .container {
     height: 100%;
-    
+
 }
 .header {
   background-color: #b3c0d1;
